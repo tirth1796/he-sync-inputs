@@ -10,7 +10,7 @@ export const SliderInput = ({ min, max, onSubmit }) => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+    <div className="flex flex-col gap-4">
       <div className="flex gap-4">
         <input
           role="slider"
