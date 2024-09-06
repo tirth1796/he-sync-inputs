@@ -18,46 +18,45 @@ const renderSliderInput = () => {
   };
 };
 
-describe("Slider Input", () => {
-  test("should allow the number input value to be removed", async () => {
-    const { rangeInput, numberInput } = renderSliderInput();
-    await userEvent.type(numberInput, "10");
-    expect(+numberInput.value).toBe(10);
-    expect(+rangeInput.value).toBe(10);
-    await userEvent.type(numberInput, "{backspace}{backspace}");
-    expect(numberInput.value).toBe("");
-  });
-
-  test("should sync number input value when slider value is changed", async () => {
-    const { rangeInput, numberInput } = renderSliderInput();
-    fireEvent.change(rangeInput, { target: { value: "10" } });
-    expect(+numberInput.value).toBe(10);
-    expect(+rangeInput.value).toBe(10);
-  });
-
-  test("should sync slider value when number input value is changed", async () => {
-    const { rangeInput, numberInput } = renderSliderInput();
-    await userEvent.type(numberInput, "10");
-    expect(+numberInput.value).toBe(10);
-    expect(+rangeInput.value).toBe(10);
-  });
-  test("should disable submit button if input value is out of range", async () => {
-    const { rangeInput, numberInput, submitButton } = renderSliderInput();
-    await userEvent.type(numberInput, "5000");
-    expect(+numberInput.value).toBe(5000);
-    expect(+rangeInput.value).toBe(50);
-    expect(submitButton.disabled).toBe(true);
-  });
-  test("should correctly handle form submission", async () => {
-    const { rangeInput, numberInput, submitButton, submitFn } =
-      renderSliderInput();
-    await userEvent.type(numberInput, "5000");
-    expect(+numberInput.value).toBe(5000);
-    expect(+rangeInput.value).toBe(50);
-
-    await userEvent.type(numberInput, "{backspace}{backspace}");
-
-    await fireEvent.click(submitButton);
-    expect(submitFn).toHaveBeenCalledWith(50);
-  });
+test("should allow the number input value to be removed", async () => {
+  const { rangeInput, numberInput } = renderSliderInput();
+  await userEvent.type(numberInput, "10");
+  expect(+numberInput.value).toBe(10);
+  expect(+rangeInput.value).toBe(10);
+  await userEvent.type(numberInput, "{backspace}{backspace}");
+  expect(numberInput.value).toBe("");
 });
+
+test("should sync number input value when slider value is changed", async () => {
+  const { rangeInput, numberInput } = renderSliderInput();
+  fireEvent.change(rangeInput, { target: { value: "10" } });
+  expect(+numberInput.value).toBe(10);
+  expect(+rangeInput.value).toBe(10);
+});
+
+test("should sync slider value when number input value is changed", async () => {
+  const { rangeInput, numberInput } = renderSliderInput();
+  await userEvent.type(numberInput, "10");
+  expect(+numberInput.value).toBe(10);
+  expect(+rangeInput.value).toBe(10);
+});
+test("should disable submit button if input value is out of range", async () => {
+  const { rangeInput, numberInput, submitButton } = renderSliderInput();
+  await userEvent.type(numberInput, "5000");
+  expect(+numberInput.value).toBe(5000);
+  expect(+rangeInput.value).toBe(50);
+  expect(submitButton.disabled).toBe(true);
+});
+test("should correctly handle form submission", async () => {
+  const { rangeInput, numberInput, submitButton, submitFn } =
+    renderSliderInput();
+  await userEvent.type(numberInput, "5000");
+  expect(+numberInput.value).toBe(5000);
+  expect(+rangeInput.value).toBe(50);
+
+  await userEvent.type(numberInput, "{backspace}{backspace}");
+
+  await fireEvent.click(submitButton);
+  expect(submitFn).toHaveBeenCalledWith(50);
+});
+
