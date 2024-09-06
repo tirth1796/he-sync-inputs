@@ -40,6 +40,7 @@ test("should sync slider value when number input value is changed", async () => 
   expect(+numberInput.value).toBe(10);
   expect(+rangeInput.value).toBe(10);
 });
+
 test("should disable submit button if input value is out of range", async () => {
   const { rangeInput, numberInput, submitButton } = renderSliderInput();
   await userEvent.type(numberInput, "5000");
@@ -47,6 +48,7 @@ test("should disable submit button if input value is out of range", async () => 
   expect(+rangeInput.value).toBe(50);
   expect(submitButton.disabled).toBe(true);
 });
+
 test("should correctly handle form submission", async () => {
   const { rangeInput, numberInput, submitButton, submitFn } =
     renderSliderInput();
