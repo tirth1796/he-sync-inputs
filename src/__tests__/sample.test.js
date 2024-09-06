@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { SliderInput } from "./SliderInput";
+import { SliderInput } from "../SliderInput";
 
 const renderSliderInput = () => {
   const submitFn = jest.fn();
