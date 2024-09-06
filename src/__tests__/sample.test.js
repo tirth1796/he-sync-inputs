@@ -19,7 +19,7 @@ const renderSliderInput = () => {
 };
 
 describe("Slider Input", () => {
-  test("the content of number input is removable", async () => {
+  test("should allow the number input value to be removed", async () => {
     const { rangeInput, numberInput } = renderSliderInput();
     await userEvent.type(numberInput, "10");
     expect(+numberInput.value).toBe(10);
@@ -28,27 +28,27 @@ describe("Slider Input", () => {
     expect(numberInput.value).toBe("");
   });
 
-  test("changing the slider value should update the input value", async () => {
+  test("should sync number input value when slider value is changed", async () => {
     const { rangeInput, numberInput } = renderSliderInput();
     fireEvent.change(rangeInput, { target: { value: "10" } });
     expect(+numberInput.value).toBe(10);
     expect(+rangeInput.value).toBe(10);
   });
 
-  test("changing the input value should update the slider value", async () => {
+  test("should sync slider value when number input value is changed", async () => {
     const { rangeInput, numberInput } = renderSliderInput();
     await userEvent.type(numberInput, "10");
     expect(+numberInput.value).toBe(10);
     expect(+rangeInput.value).toBe(10);
   });
-  test("submit button should be disabled if value is out of range", async () => {
+  test("should disable submit button if input value is out of range", async () => {
     const { rangeInput, numberInput, submitButton } = renderSliderInput();
     await userEvent.type(numberInput, "5000");
     expect(+numberInput.value).toBe(5000);
     expect(+rangeInput.value).toBe(50);
     expect(submitButton.disabled).toBe(true);
   });
-  test("submit should work correctly", async () => {
+  test("should correctly handle form submission", async () => {
     const { rangeInput, numberInput, submitButton, submitFn } =
       renderSliderInput();
     await userEvent.type(numberInput, "5000");
